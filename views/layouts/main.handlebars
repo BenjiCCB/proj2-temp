@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share-A-Byte</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <header class="p-5">
+    <nav class="navbar has-text-weight-bold is-size-5" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/"><img src="/images/logo.png"></a>
+      
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="potluckAndKitchen">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="potluckAndKitchen" class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link has-text-white arrow-head">The Potluck</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="/catalog">Catalog</a>
+              <a class="navbar-item" href="/search">Search</a>
+            </div>
+          </div>
+          {{#if logged_in}}
+          <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link has-text-white arrow-head">My Kitchen</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="/my-kitchen">My Recipes</a>
+              <a class="navbar-item" href="/my-favorites">My Favorites</a>
+              <hr class="navbar-divider m-3">
+              <a class="navbar-item" href="/"><button class="no-button has-text-weight-bold p-0" id="logout">Close Kitchen</button></a>
+            </div>
+          </div>
+          {{else}}
+          <a class="navbar-item has-text-white" href="/login">Enter Kitchen</a>
+          {{/if}}
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container mt-5">
+
+    {{{ body }}}
+
+  </main>
+
+  <footer class="p-5 has-text-centered">
+    <p class="title is-5 has-text-white is-spaced">Created by Group 6</p>
+    <p class="subtitle is-5 has-text-white">Special Thanks to the CU Boot Camp Team</p>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <!-- Render script for logged in users only -->
+  {{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+</body>
+
+</html>
