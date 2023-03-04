@@ -16,30 +16,6 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-// update recipe
-router.put('/:id', withAuth, async (req, res) => {
-  try {
-    const recipe = await Recipe.update(
-      {
-        recipe_name: req.body.recipe_name,
-        recipe_image: req.body.recipe_image,
-        ingredients: req.body.ingredients,
-        instructions: req.body.instructions,
-      },
-      {
-        where: {
-          id: req.params.id,
-          user_id: req.session.user_id,
-        },
-      }
-    );
-
-    res.status(200).json(recipe);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
 
 // display recipe
 router.get('/:id', async (req, res) => {
@@ -81,8 +57,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-
-// modify recipe
+// display update form
 router.get('/modify/:id', withAuth, async (req, res) => {
   try {
     const recipeData = await Recipe.findByPk(req.params.id, {
@@ -105,6 +80,30 @@ router.get('/modify/:id', withAuth, async (req, res) => {
     }
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+// update recipe
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const recipe = await Recipe.update(
+      {
+        recipe_name: req.body.recipe_name,
+        recipe_image: req.body.recipe_image,
+        ingredients: req.body.ingredients,
+        instructions: req.body.instructions,
+      },
+      {
+        where: {
+          id: req.params.id,
+          user_id: req.session.user_id,
+        },
+      }
+    );
+
+    res.status(200).json(recipe);
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 
